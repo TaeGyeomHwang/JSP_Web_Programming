@@ -24,29 +24,22 @@
 	</div>
 	<%
 	ArrayList<Book> listOfBooks = bookDAO.getAllBooks();
-	Book book1 = listOfBooks.get(0);
-	Book book2 = listOfBooks.get(1);
-	Book book3 = listOfBooks.get(2);
 	%>
 	<div class="container">
-		<div class="text-left">
-			<h3><%="["+book1.getCategory()+"]"+book1.getName() %></h3>
-			<p><%=book1.getDescription() %>
-			<p><%=book1.getAuthor()+" | "+book1.getPublisher()+" | "+book1.getUnitPrice()+"원" %>
-		</div>
-		<hr>
-		<div class="text-left">
-			<h3><%="["+book2.getCategory()+"]"+book2.getName() %></h3>
-			<p><%=book2.getDescription() %>
-			<p><%=book2.getAuthor()+" | "+book2.getPublisher()+" | "+book2.getUnitPrice()+"원" %>
-		</div>
-		<hr>
-		<div class="text-left">
-			<h3><%="["+book3.getCategory()+"]"+book3.getName() %></h3>
-			<p><%=book3.getDescription() %>
-			<p><%=book3.getAuthor()+" | "+book3.getPublisher()+" | "+book3.getUnitPrice()+"원" %>
-		</div>
-		<hr>
+			<%
+			for (int i = 0; i < listOfBooks.size(); i++) {
+				Book book = listOfBooks.get(i);
+				System.out.println(book.getName());
+			%>
+			<div class="text-left">
+				<h3><%="["+book.getCategory()+"]"+book.getName() %></h3>
+				<p><%=book.getDescription() %>
+				<p><%=book.getAuthor()+" | "+book.getPublisher()+" | "+book.getUnitPrice()+"원" %>
+			</div>
+			<hr>
+			<%
+			}
+			%>
 	</div>
 	<footer class="container">
 		<p>&copy; BookMarket</p>
