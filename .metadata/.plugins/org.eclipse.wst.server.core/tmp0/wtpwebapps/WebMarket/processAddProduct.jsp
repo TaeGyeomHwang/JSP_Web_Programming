@@ -1,9 +1,19 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.oreilly.servlet.*"%>
+<%@ page import="com.oreilly.servlet.multipart.*"%>
+<%@ page import="java.util.*"%>
 <%@ page import="dto.Product"%>
 <%@ page import="dao.ProductRepository"%>
 
 <%
 request.setCharacterEncoding("UTF-8");
+
+String filename = "";
+String realFolder = "C:\\upload";
+int maxSize = 5 * 1024 * 1024;
+String encType = "UTF-8";
+
+MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 
 String productId = request.getParameter("productId");
 String name = request.getParameter("name");
@@ -27,6 +37,10 @@ if (unitsInStock.isEmpty())
 	stock = 0;
 else
 	stock = Long.valueOf(unitsInStock);
+
+Enumeration files = multi.getFileNames();
+String fname = (String) files.nextElement();
+String fileName = multi.getFilesystemName(fname);
 
 ProductRepository dao = ProductRepository.getInstance();
 
