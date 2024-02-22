@@ -1,9 +1,0 @@
-<%@ page contentType="text/xml; charset=utf-8" %>
-<html>
-<head>
-<title>Directives Tag</title>
-</head>
-<body>
-	<h2>contentType 디렉티브 태그</h2>
-</body>
-</html>

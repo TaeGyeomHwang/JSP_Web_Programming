@@ -1,9 +1,0 @@
-<%@ page import="java.util.Calendar"%>
-<html>
-<head>
-<title>Scripting Tag</title>
-</head>
-<body>
-	<%= Calendar.getInstance().getTime() %>
-</body>
-</html>
