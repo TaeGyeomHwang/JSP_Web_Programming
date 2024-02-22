@@ -1,0 +1,4 @@
+01	request 내장 객체는 JSP 페이지에서 가장 많이 사용되는 기본 내장 객체로, 웹 브라우저에서 서버의 JSP 페이지로 전달하는
+	정보를 저장한다. 관련 메소드로는 파라미터 값을 전달받는 getParameter(), 모든 요청 파라미터 값들을 배열 형태로
+	전달받는 getParameterValues(), 모든 요청 파라미터의 이름과 값을 Enumeraion 객체 타입으로 전달받는 
+	getParameterNames(), 모든 요철 파라미터의 이름과 값을 Map 객체 타입으로 전달받는 getParameterMap()이 있다.

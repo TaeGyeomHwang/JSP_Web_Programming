@@ -1,0 +1,14 @@
+<%@ page import="java.util.Date" %>
+<html>
+<head>
+<title>Scripting Tag</title>
+</head>
+<body>
+	<%
+		Date date = new java.util.Date();
+	%>
+	<p>
+		Today:
+		<%=new java.util.Date()%></p>
+</body>
+</html>

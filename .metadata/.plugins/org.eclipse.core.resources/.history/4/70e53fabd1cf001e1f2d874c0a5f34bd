@@ -1,0 +1,9 @@
+<%@ page import="java.util.Calendar"%>
+<html>
+<head>
+<title>Scripting Tag</title>
+</head>
+<body>
+	<%="Today :"+new java.util.Calendar %>
+</body>
+</html>

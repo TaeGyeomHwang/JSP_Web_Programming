@@ -1,0 +1,14 @@
+<%@ page contentType="text/html; charset=utf-8" %>
+<html>
+<head>
+<title>Directives Tag</title>
+</head>
+<body>
+	<%
+	int age = Integer.parseInt(request.getParameter("num"));
+		for(int i=1; i<10; i++){
+			out.println();
+		}
+	%>
+</body>
+</html>

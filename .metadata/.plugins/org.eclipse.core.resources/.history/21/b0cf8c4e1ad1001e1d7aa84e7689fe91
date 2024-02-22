@@ -1,0 +1,9 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<html>
+<head>
+<title>Form Processing</title>
+</head>
+<body>
+	<h3>회원 가입</h3>
+</body>
+</html>

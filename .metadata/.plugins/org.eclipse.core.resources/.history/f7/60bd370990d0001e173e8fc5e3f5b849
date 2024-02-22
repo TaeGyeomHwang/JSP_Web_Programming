@@ -1,0 +1,7 @@
+package ch04.practice;
+
+public class GuGuDan {
+	public int process(int n) {
+		return n * n * n;
+	}
+}
