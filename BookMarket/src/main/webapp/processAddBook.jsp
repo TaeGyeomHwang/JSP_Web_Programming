@@ -2,8 +2,8 @@
 <%@ page import="com.oreilly.servlet.*"%>
 <%@ page import="com.oreilly.servlet.multipart.*"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dto.Product"%>
-<%@ page import="dao.ProductRepository"%>
+<%@ page import="dto.Book"%>
+<%@ page import="dao.BookRepository"%>
 
 <%
 request.setCharacterEncoding("UTF-8");
@@ -15,47 +15,57 @@ String encType = "UTF-8";
 
 MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 
-String productId = request.getParameter("productId");
+String bookId = request.getParameter("bookId");
 String name = request.getParameter("name");
 String unitPrice = request.getParameter("unitPrice");
+String author = request.getParameter("author");
 String description = request.getParameter("description");
-String manufacturer = request.getParameter("manufacturer");
+String publisher = request.getParameter("publisher");
 String category = request.getParameter("category");
 String unitsInStock = request.getParameter("unitsInStock");
+String totalPages = request.getParameter("totalPages");
+String releaseDate = request.getParameter("releaseDate");
 String condition = request.getParameter("condition");
 
 Integer price;
-
 if (unitPrice.isEmpty())
 	price = 0;
 else
 	price = Integer.valueOf(unitPrice);
 
 long stock;
-
 if (unitsInStock.isEmpty())
 	stock = 0;
 else
 	stock = Long.valueOf(unitsInStock);
 
+long pages;
+if (unitsInStock.isEmpty())
+	pages = 0;
+else
+	pages = Long.valueOf(totalPages);
+
 Enumeration files = multi.getFileNames();
 String fname = (String) files.nextElement();
 String fileName = multi.getFilesystemName(fname);
 
-ProductRepository dao = ProductRepository.getInstance();
+BookRepository dao = BookRepository.getInstance();
 
-Product newProduct = new Product();
-newProduct.setProductId(productId);
-newProduct.setPname(name);
+Book newProduct = new Book();
+newProduct.setBookId(bookId);
+newProduct.setName(name);
 newProduct.setUnitPrice(price);
+newProduct.setAuthor(author);
 newProduct.setDescription(description);
-newProduct.setManufacturer(manufacturer);
+newProduct.setPublisher(publisher);
 newProduct.setCategory(category);
 newProduct.setUnitsInStock(stock);
+newProduct.setTotalPages(pages);
+newProduct.setReleaseDate(releaseDate);
 newProduct.setCondition(condition);
 newProduct.setFilename(fileName);
 
-dao.addProduct(newProduct);
+dao.addBook(newProduct);
 
 response.sendRedirect("products.jsp");
 %>
