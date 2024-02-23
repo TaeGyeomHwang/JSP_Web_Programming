@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="dto.Book"%>
-<jsp:useBean id="bookDAO" class="dao.BookRepository" scope="session" />
+<%@ page import="dao.BookRepository"%>
 <html>
 <head>
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css" />
@@ -15,10 +15,14 @@
 	</div>
 	<%
 	String id = request.getParameter("id");
-	Book book = bookDAO.getBookById(id);
+	BookRepository dao = BookRepository.getInstance();
+	Book book = dao.getBookById(id);
 	%>
 	<div class="container">
 		<div class="row">
+		<div class="col-md-5">
+				<img src="/upload/<%=book.getFilename()%>" style="width: 100%">
+			</div>
 			<div class="col-md-6">
 				<h3><%=book.getName()%></h3>
 				<p><%=book.getDescription()%>

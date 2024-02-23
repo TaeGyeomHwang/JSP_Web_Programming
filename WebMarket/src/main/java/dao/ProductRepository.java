@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import dto.Product;
 
 public class ProductRepository {
-	private ArrayList<Product> listOfProducts = new ArrayList<Product>();
+	private static ArrayList<Product> listOfProducts = new ArrayList<Product>();
 	private static ProductRepository instance = new ProductRepository();
 	
 	public static ProductRepository getInstance() {
@@ -61,5 +61,12 @@ public class ProductRepository {
 	
 	public void addProduct(Product product) {
 		listOfProducts.add(product);
+	}
+	public void deleteProduct(Product product) {
+		for(Product p : listOfProducts) {
+			if(p.getProductId().equals("P1237")) {
+				listOfProducts.remove(p);
+			}
+		}
 	}
 }

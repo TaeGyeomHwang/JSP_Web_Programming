@@ -22,7 +22,6 @@
 			<%
 			for (int i = 0; i < listOfBooks.size(); i++) {
 				Book book = listOfBooks.get(i);
-				System.out.println(book.getFilename());
 			%>
 			<img src="/upload/<%=book.getFilename()%>" style="width: 100%">
 			<h3><%="[" + book.getCategory() + "]" + book.getName()%></h3>

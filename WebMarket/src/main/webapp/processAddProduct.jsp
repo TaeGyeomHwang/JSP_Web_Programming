@@ -15,14 +15,14 @@ String encType = "UTF-8";
 
 MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 
-String productId = request.getParameter("productId");
-String name = request.getParameter("name");
-String unitPrice = request.getParameter("unitPrice");
-String description = request.getParameter("description");
-String manufacturer = request.getParameter("manufacturer");
-String category = request.getParameter("category");
-String unitsInStock = request.getParameter("unitsInStock");
-String condition = request.getParameter("condition");
+String productId = multi.getParameter("productId");
+String name = multi.getParameter("name");
+String unitPrice = multi.getParameter("unitPrice");
+String description = multi.getParameter("description");
+String manufacturer = multi.getParameter("manufacturer");
+String category = multi.getParameter("category");
+String unitsInStock = multi.getParameter("unitsInStock");
+String condition = multi.getParameter("condition");
 
 Integer price;
 
