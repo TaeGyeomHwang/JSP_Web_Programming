@@ -15,17 +15,17 @@ String encType = "UTF-8";
 
 MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 
-String bookId = request.getParameter("bookId");
-String name = request.getParameter("name");
-String unitPrice = request.getParameter("unitPrice");
-String author = request.getParameter("author");
-String description = request.getParameter("description");
-String publisher = request.getParameter("publisher");
-String category = request.getParameter("category");
-String unitsInStock = request.getParameter("unitsInStock");
-String totalPages = request.getParameter("totalPages");
-String releaseDate = request.getParameter("releaseDate");
-String condition = request.getParameter("condition");
+String bookId = multi.getParameter("bookId");
+String name = multi.getParameter("name");
+String unitPrice = multi.getParameter("unitPrice");
+String author = multi.getParameter("author");
+String description = multi.getParameter("description");
+String publisher = multi.getParameter("publisher");
+String category = multi.getParameter("category");
+String unitsInStock = multi.getParameter("unitsInStock");
+String totalPages = multi.getParameter("totalPages");
+String releaseDate = multi.getParameter("releaseDate");
+String condition = multi.getParameter("condition");
 
 Integer price;
 if (unitPrice.isEmpty())
@@ -67,5 +67,5 @@ newProduct.setFilename(fileName);
 
 dao.addBook(newProduct);
 
-response.sendRedirect("products.jsp");
+response.sendRedirect("books.jsp");
 %>

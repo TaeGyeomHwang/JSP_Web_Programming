@@ -16,7 +16,6 @@ local.properties
 *.MF
 *.policy
 *.properties
-*.xml
 
 # External tool builders
 .externalToolBuilders/
