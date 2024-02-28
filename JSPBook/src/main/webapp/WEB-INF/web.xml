@@ -17,8 +17,56 @@
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/ch10/practice/practice04_login.jsp</form-login-page>
-			<form-error-page>/ch10/practice/practice04_login_failed.jsp</form-error-page>
+			<form-login-page>/ch10/practice/practice04_login.jsp
+			</form-login-page>
+			<form-error-page>/ch10/practice/practice04_login_failed.jsp
+			</form-error-page>
 		</form-login-config>
 	</login-config>
+	<!-- 
+	<error-page>
+		<error-code>500</error-code>
+		<location>/ch11/errorCode_error.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>javax.servlet.ServletException</exception-type>
+		<location>/ch11/practice/practice05_error.jsp</location>
+	</error-page>
+	 -->
+	<filter>
+		<filter-name>Filter02</filter-name>
+		<filter-class>ch12.InitParamFilter</filter-class>
+		<init-param>
+			<param-name>param1</param-name>
+			<param-value>admin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>param2</param-name>
+			<param-value>1234</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Filter02</filter-name>
+		<url-pattern>/ch12/filter02_process.jsp</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>Filter02_2</filter-name>
+		<filter-class>ch12.LogFileFilter</filter-class>
+		<init-param>
+			<param-name>filename</param-name>
+			<param-value>c:\\logs\\monitor.log</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Filter02_2</filter-name>
+		<url-pattern>/ch12/filter02_process.jsp</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>ch12.practice.LoginCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/ch12/practice/practice04_success.jsp</url-pattern>
+	</filter-mapping>
 </web-app>
