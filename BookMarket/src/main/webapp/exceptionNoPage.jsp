@@ -14,7 +14,7 @@
 	<div class="container">
 		<p><%=request.getRequestURL()%></p>
 		<p>
-			<a href="products.jsp" class="btn btn-secondary"> 도서 목록 &raquo;</a>
+			<a href="Books.jsp" class="btn btn-secondary"> 도서 목록 &raquo;</a>
 	</div>
 </body>
 </html>
