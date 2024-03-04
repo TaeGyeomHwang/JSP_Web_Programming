@@ -2,8 +2,8 @@
 <%@ page import="com.oreilly.servlet.*"%>
 <%@ page import="com.oreilly.servlet.multipart.*"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dto.Book"%>
-<%@ page import="dao.BookRepository"%>
+<%@ page import="java.sql.*"%>
+<%@ include file="dbconn.jsp"%>
 
 <%
 request.setCharacterEncoding("UTF-8");
@@ -49,23 +49,29 @@ Enumeration files = multi.getFileNames();
 String fname = (String) files.nextElement();
 String fileName = multi.getFilesystemName(fname);
 
-BookRepository dao = BookRepository.getInstance();
+PreparedStatement pstmt = null;
+ResultSet rs = null;
 
-Book newProduct = new Book();
-newProduct.setBookId(bookId);
-newProduct.setName(name);
-newProduct.setUnitPrice(price);
-newProduct.setAuthor(author);
-newProduct.setDescription(description);
-newProduct.setPublisher(publisher);
-newProduct.setCategory(category);
-newProduct.setUnitsInStock(stock);
-newProduct.setTotalPages(pages);
-newProduct.setReleaseDate(releaseDate);
-newProduct.setCondition(condition);
-newProduct.setFilename(fileName);
+String sql = "insert into product values(?,?,?,?,?,?,?,?,?,?,?,?)";
+pstmt = conn.prepareStatement(sql);
+pstmt.setString(1, bookId);
+pstmt.setString(2, name);
+pstmt.setInt(3, price);
+pstmt.setString(4, author);
+pstmt.setString(5, description);
+pstmt.setString(6, publisher);
+pstmt.setString(7, category);
+pstmt.setLong(8, stock);
+pstmt.setLong(9, pages);
+pstmt.setString(10, releaseDate);
+pstmt.setString(11, condition);
+pstmt.setString(12, fileName);
+pstmt.executeUpdate();
 
-dao.addBook(newProduct);
+if (pstmt != null)
+	pstmt.close();
+if (conn != null)
+	conn.close();
 
 response.sendRedirect("books.jsp");
 %>

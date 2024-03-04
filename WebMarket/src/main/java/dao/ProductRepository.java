@@ -18,7 +18,7 @@ public class ProductRepository {
 		phone.setCategory("Smart Phone");
 		phone.setManufacturer("Apple");
 		phone.setUnitsInStock(1000);
-		phone.setCondition("New");
+		phone.setCondition("new");
 		phone.setFilename("P1234.png");
 
 		Product noteBook = new Product("P1235", "LG PC 그램", 1500000);
