@@ -60,32 +60,39 @@ int nowpage = ((Integer) request.getAttribute("page")).intValue();
 							action="BoardUpdateAction.do?num=<%=notice.getNum()%>&pageNum=<%=nowpage%>"
 							class="form-signin subheading" method="post">
 							<div class="form-group row m-3">
-								<c:if test="${sessionId!=null}">
-									<label class="col-sm-1 mb-2">Comment</label>
-									<input name="comment" class="form-control">
-								</c:if>
-								<c:if test="${sessionId==null}">
-									<label class="col-sm-1 mb-2">Comment</label>
-									<input name="comment" class="form-control" value="댓글을 작성하려면 로그인을 해주세요!">
-								</c:if>
+								<label class="col-sm-1 mb-2">Name</label> <input name="name"
+									class="form-control" value="<%=notice.getName()%>">
 							</div>
-							<div class="form-group row m-3">
-								<div class="col-sm-offset-4 ">
-									<c:if test="${sessionId!=null}">
+							<c:if test="${sessionId!=null}">
+								<div class="form-group row m-3">
+									<label class="col-sm-1 mb-2">Comment</label> <input
+										name="comment" class="form-control">
+								</div>
+							</c:if>
+							<c:if test="${sessionId==null}">
+								<div class="form-group row m-3">
+									<label class="col-sm-1 mb-2">Comment</label> <input
+										name="comment" class="form-control"
+										value="댓글을 작성하려면 로그인을 해주세요!">
+								</div>
+							</c:if>
+							<c:if test="${sessionId!=null}">
+								<div class="form-group row m-3">
+									<div class="col-sm-offset-4 ">
 										<input type="submit" class="btn btn-success"
 											value="ADD COMMENT">
-									</c:if>
+									</div>
 								</div>
-							</div>
+							</c:if>
 							<table
 								class="table table-hover  table-light table-striped align-middle">
-									<thead>
-										<tr>
-											<th>Names</th>
-											<th>Comments</th>
-										</tr>
-									</thead>
-									<tbody class="table-group-divider">
+								<thead>
+									<tr>
+										<th>Names</th>
+										<th>Comments</th>
+									</tr>
+								</thead>
+								<tbody class="table-group-divider">
 									<%
 									for (int j = 0; j < commentList.size(); j++) {
 										CommentDTO comments = (CommentDTO) commentList.get(j);
