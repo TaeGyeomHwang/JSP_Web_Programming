@@ -25,45 +25,46 @@
 </head>
 <body>
 	<jsp:include page="/menu.jsp" />
-	<div class="jumbotron">
-		<div class="container">
-			<h1 class="display-3">회원 가입</h1>
+	<header class="masthead bg-secondary">
+		<div class="container position-relative px-4 px-lg-5">
+			<div class="row gx-4 gx-lg-5 justify-content-center">
+				<div class="col-md-10 col-lg-8 col-xl-7">
+					<div class="site-heading">
+						<h1 class="form-signin-heading ">Sign up</h1>
+						<form name="newMember" class="form-signin subheading"
+							action="processAddMember.jsp" method="post"
+							onsubmit="return checkForm()">
+							<div class="form-group row m-3">
+								<label class="col-sm-1 mb-2">ID</label> <input name="id" type="text"
+									class="form-control" placeholder="id">
+							</div>
+							<div class="form-group row m-3">
+								<label class="col-sm-1 mb-2">PW</label>
+									<input name="password" type="text" class="form-control"
+										placeholder="password">
+							</div>
+							<div class="form-group row m-3">
+								<label class="col-sm-4 mb-2 text-start">PW confirm</label> <input
+									name="password_confirm" type="text" class="form-control"
+									placeholder="password confirm">
+							</div>
+							<div class="form-group row m-3">
+								<label class="col-sm-2 mb-2">Name</label>
+									<input name="name" type="text" class="form-control"
+										placeholder="name">
+							</div>
+							<div class="form-group row m-3">
+								<div class="col-sm-offset-4">
+									<input type="submit" class="btn btn-primary" value="SIGN UP">
+									<input type="reset" class="btn btn-primary" value="RESET"
+										onclick="reset()">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
-
-	<div class="container">
-		<form name="newMember" class="form-horizontal"  action="processAddMember.jsp" method="post" onsubmit="return checkForm()">
-			<div class="form-group  row">
-				<label class="col-sm-2 ">아이디</label>
-				<div class="col-sm-3">
-					<input name="id" type="text" class="form-control" placeholder="id" >
-				</div>
-			</div>
-			<div class="form-group  row">
-				<label class="col-sm-2">비밀번호</label>
-				<div class="col-sm-3">
-					<input name="password" type="text" class="form-control" placeholder="password" >
-				</div>
-			</div>
-			<div class="form-group  row">
-				<label class="col-sm-2">비밀번호 확인</label>
-				<div class="col-sm-3">
-					<input name="password_confirm" type="text" class="form-control" placeholder="password confirm" >
-				</div>
-			</div>
-			<div class="form-group  row">
-				<label class="col-sm-2">성명</label>
-				<div class="col-sm-3">
-					<input name="name" type="text" class="form-control" placeholder="name" >
-				</div>
-			</div>
-			<div class="form-group  row">
-				<div class="col-sm-offset-2 col-sm-10 ">
-					<input type="submit" class="btn btn-primary " value="등록 " > 
-					<input type="reset" class="btn btn-primary " value="취소 " onclick="reset()" >
-				</div>
-			</div>
-		</form>
-	</div>
+	</header>
 </body>
 </html>

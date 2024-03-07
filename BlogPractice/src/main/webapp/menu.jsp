@@ -3,10 +3,11 @@
 <%
 String sessionId = (String) session.getAttribute("sessionId");
 %>
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+<nav class="navbar navbar-expand-md navbar-dark"
+	style="background-color: #474d53;">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/BlogPractice/welcome.jsp">Home</a>
+			<a class="navbar-brand" href="/BlogPractice/welcome.jsp"><h3>Home</h3></a>
 		</div>
 		<div>
 			<ul class="navbar-nav mr-auto">
@@ -18,12 +19,15 @@ String sessionId = (String) session.getAttribute("sessionId");
 							href='<c:url value="/member/addMember.jsp"/>'>SIGN UP</a></li>
 					</c:when>
 					<c:otherwise>
-						<li style="padding-top: 7px; color: white">[<%=sessionId%>님]
-						</li>
-						<li class="nav-item"><a class="nav-link"
-							href="<c:url value="/member/logoutMember.jsp"/>">로그아웃 </a></li>
+						<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+							href="<c:url value="/member/updateMember.jsp"/>">Welcome, <%=sessionId%>!
+						</a></li>
+						<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+							href="<c:url value="/member/logoutMember.jsp"/>">LOGOUT </a></li>
 					</c:otherwise>
 				</c:choose>
+				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+					href="<c:url value="/BoardListAction.do?pageNum=1"/>">COMMUNITY</a></li>
 			</ul>
 		</div>
 	</div>

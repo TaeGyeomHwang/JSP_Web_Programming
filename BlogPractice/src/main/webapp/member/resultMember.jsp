@@ -1,34 +1,60 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <html>
 <head>
-<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../resources/css/styles.css" />
 <title>회원 정보</title>
 </head>
 <body>
 	<jsp:include page="/menu.jsp" />
-	<div class="jumbotron">
-		<div class="container">
-			<h1 class="display-3">회원정보</h1>
+	<header class="masthead bg-secondary">
+		<div class="container position-relative px-4 px-lg-5">
+			<div class="row gx-4 gx-lg-5 justify-content-center">
+				<div class="col-md-10 col-lg-8 col-xl-7">
+					<div class="site-heading" align="center">
+						<%
+						String msg = request.getParameter("msg");
+
+						if (msg != null) {
+							if (msg.equals("0")) {
+								out.println(" <h2 class='alert alert-danger'>Update compelete!</h2>");
+						%>
+						<span class="subheading mt-5"><a
+							class="btn btn-primary text-uppercase"
+							href="/BlogPractice/member/loginMember.jsp">Click here
+								to login!</a></span>
+						<%
+						} else if (msg.equals("1")) {
+						out.println("<h2 class='alert alert-danger'>Succeed to Sign up!</h2>");
+						%>
+						<span class="subheading mt-5"><a
+							class="btn btn-primary text-uppercase"
+							href="/BlogPractice/member/loginMember.jsp">Click here
+								to login!</a></span>
+						<%
+						} else if (msg.equals("2")) {
+						String loginId = (String) session.getAttribute("sessionId");
+						out.println(" <h2 class='alert alert-danger'>Welcome, " + loginId + "!</h2>");
+						%>
+						<span class="subheading mt-5"><a
+							class="btn btn-primary text-uppercase"
+							href="/BlogPractice/BoardListAction.do?pageNum=1">Click here
+								to start!</a></span>
+						<%
+						}
+						} else {
+						out.println("<h2 class='alert alert-danger'>Delete complete!</h2>");
+						%>
+						<span class="subheading mt-5"><a
+							class="btn btn-primary text-uppercase"
+							href="/BlogPractice/BoardListAction.do?pageNum=1">Click here
+								to start!</a></span>
+						<%
+						}
+						%>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
-
-	<div class="container" align="center">
-		<%
-			String msg = request.getParameter("msg");
-
-			if (msg != null) {
-				if (msg.equals("0"))
-					out.println(" <h2 class='alert alert-danger'>회원정보가 수정되었습니다.</h2>");
-				else if (msg.equals("1"))
-					out.println(" <h2 class='alert alert-danger'>회원가입에 성공했습니다.");
-				else if (msg.equals("2")) {
-					String loginId = (String) session.getAttribute("sessionId");
-					out.println(" <h2 class='alert alert-danger'>" + loginId + "님 환영합니다</h2>");
-				}				
-			} else {
-				out.println("<h2 class='alert alert-danger'>회원정보가 삭제되었습니다.</h2>");
-			}
-		%>
-	</div>	
+	</header>
 </body>
 </html>

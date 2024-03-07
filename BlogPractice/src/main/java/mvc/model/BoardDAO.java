@@ -156,9 +156,6 @@ public class BoardDAO {
 
 	//board 테이블에 새로운 글 삽입히가
 	public void insertBoard(BoardDTO board)  {
-
-		
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {

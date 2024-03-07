@@ -12,9 +12,9 @@
 			<div class="row gx-4 gx-lg-5 justify-content-center">
 				<div class="col-md-10 col-lg-8 col-xl-7">
 					<div class="site-heading">
-						<h1>Simple Community</h1>
-						<span class="subheading"><a
-							class="btn btn-secondary text-uppercase"
+						<h1 >Simple Community.</h1>
+						<span class="subheading mt-5"><a
+							class="btn btn-primary text-uppercase"
 							href="/BlogPractice/BoardListAction.do?pageNum=1">Click here
 								to start!</a></span>
 					</div>
