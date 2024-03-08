@@ -12,6 +12,7 @@ int total_page = ((Integer) request.getAttribute("total_page")).intValue();
 
 <html>
 <head>
+<jsp:include page="/head.jsp" />
 <link rel="stylesheet" href="./resources/css/styles.css" />
 <title>Board</title>
 <script type="text/javascript">
@@ -27,7 +28,7 @@ int total_page = ((Integer) request.getAttribute("total_page")).intValue();
 </head>
 <body>
 	<jsp:include page="../menu.jsp" />
-	<header class="masthead bg-secondary">
+	<header class="masthead bg-secondary" style="background-image: url('./resources/images/home-bg.jpg');">
 		<div class="container position-relative px-4 px-lg-5">
 			<div class="row gx-4 gx-lg-5 justify-content-center">
 				<div class="col-md-10 col-lg-8 col-xl-7">
@@ -73,10 +74,10 @@ int total_page = ((Integer) request.getAttribute("total_page")).intValue();
 									<a href="<c:url value="./BoardListAction.do?pageNum=${i}" /> ">
 										<c:choose>
 											<c:when test="${pageNum==i}">
-												<font color='#2998ba'><b> [${i}]</b></font>
+												<font color='#fff'><b> [${i}]</b></font>
 											</c:when>
 											<c:otherwise>
-												<font color='#fff'> [${i}]</font>
+												<font color='#000'> [${i}]</font>
 
 											</c:otherwise>
 										</c:choose>
@@ -107,6 +108,7 @@ int total_page = ((Integer) request.getAttribute("total_page")).intValue();
 			</div>
 		</div>
 	</header>
+	<jsp:include page="/footer.jsp" />
 </body>
 </html>
 

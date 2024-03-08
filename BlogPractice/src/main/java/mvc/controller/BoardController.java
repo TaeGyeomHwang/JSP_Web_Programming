@@ -1,14 +1,21 @@
 package mvc.controller;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import mvc.model.BoardDAO;
 import mvc.model.BoardDTO;
@@ -54,14 +61,22 @@ public class BoardController extends HttpServlet {
 			rd.forward(request, response);
 		} else if (command.equals("/BoardUpdateAction.do")) { // 선택된 글의 조회수 증가하기
 			requestBoardUpdate(request);
-			requestCommentUpdate(request);
 			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do");
 			rd.forward(request, response);
 		} else if (command.equals("/BoardDeleteAction.do")) { // 선택된 글 삭제하기
 			requestBoardDelete(request);
 			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do");
 			rd.forward(request, response);
+		} else if (command.equals("/CommentUpdateAction.do")) { // 글에 댓글 추가하기
+			requestCommentUpdate(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do");
+			rd.forward(request, response);
+		} else if (command.equals("/CommentDeleteAction.do")) { // 글에서 댓글 삭제하기
+			requestCommentDelete(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do");
+			rd.forward(request, response);
 		}
+
 	}
 
 	// 등록된 글 목록 가져오기
@@ -128,25 +143,34 @@ public class BoardController extends HttpServlet {
 	}
 
 	// 새로운 글 등록하기
-	public void requestBoardWrite(HttpServletRequest request) {
-
+	public void requestBoardWrite(HttpServletRequest request) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		
+		String filename = "";
+		String realFolder = "C:\\upload"; // 웹 어플리케이션상의 절대 경로
+		String encType = "utf-8"; // 인코딩 타입
+		int maxSize = 5 * 1024 * 1024; // 최대 업로드될 파일의 크기5Mb
+		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType,
+				new DefaultFileRenamePolicy());
+		
 		BoardDAO dao = BoardDAO.getInstance();
 
 		BoardDTO board = new BoardDTO();
-		board.setId(request.getParameter("id"));
-		board.setName(request.getParameter("name"));
-		board.setSubject(request.getParameter("subject"));
-		board.setContent(request.getParameter("content"));
+		board.setId(multi.getParameter("id"));
+		board.setName(multi.getParameter("name"));
+		board.setSubject(multi.getParameter("subject"));
+		board.setContent(multi.getParameter("content"));
 
-		System.out.println(request.getParameter("name"));
-		System.out.println(request.getParameter("subject"));
-		System.out.println(request.getParameter("content"));
 		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
 		String regist_day = formatter.format(new java.util.Date());
 
+		Enumeration files = multi.getFileNames();
+		String fname = (String) files.nextElement();
+		String fileName = multi.getFilesystemName(fname);
+
 		board.setHit(0);
 		board.setRegist_day(regist_day);
-		board.setIp(request.getRemoteAddr());
+		board.setFileName(fileName);
 
 		dao.insertBoard(board);
 	}
@@ -167,29 +191,41 @@ public class BoardController extends HttpServlet {
 	}
 
 	// 선택된 글 내용 수정하기
-	public void requestBoardUpdate(HttpServletRequest request) {
+	public void requestBoardUpdate(HttpServletRequest request) throws IOException {
 
 		int num = Integer.parseInt(request.getParameter("num"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 
+		String filename = "";
+		String realFolder = "C:\\upload"; // 웹 어플리케이션상의 절대 경로
+		String encType = "utf-8"; // 인코딩 타입
+		int maxSize = 5 * 1024 * 1024; // 최대 업로드될 파일의 크기5Mb
+		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType,
+				new DefaultFileRenamePolicy());
+		
 		BoardDAO dao = BoardDAO.getInstance();
 
 		BoardDTO board = new BoardDTO();
 		board.setNum(num);
-		board.setName(request.getParameter("name"));
-		board.setSubject(request.getParameter("subject"));
-		board.setContent(request.getParameter("content"));
+		board.setName(multi.getParameter("name"));
+		board.setSubject(multi.getParameter("subject"));
+		board.setContent(multi.getParameter("content"));
 
 		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
 		String regist_day = formatter.format(new java.util.Date());
+		
+		Enumeration files = multi.getFileNames();
+		String fname = (String) files.nextElement();
+		String fileName = multi.getFilesystemName(fname);
 
 		board.setHit(0);
 		board.setRegist_day(regist_day);
-		board.setIp(request.getRemoteAddr());
+		board.setFileName(fileName);
 
 		dao.updateBoard(board);
 	}
 
+	// 댓글 추가하기
 	private void requestCommentUpdate(HttpServletRequest request) {
 		int num = Integer.parseInt(request.getParameter("num"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
@@ -198,9 +234,9 @@ public class BoardController extends HttpServlet {
 
 		CommentDTO comment = new CommentDTO();
 		comment.setBNum(num);
-		comment.setId(request.getParameter("id"));
-		comment.setName(request.getParameter("name"));
-		comment.setContent(request.getParameter("content"));
+		comment.setId(request.getParameter("cid"));
+		comment.setName(request.getParameter("cname"));
+		comment.setContent(request.getParameter("comment"));
 
 		dao.insertComment(comment);
 	}
@@ -213,5 +249,13 @@ public class BoardController extends HttpServlet {
 
 		BoardDAO dao = BoardDAO.getInstance();
 		dao.deleteBoard(num);
+	}
+
+	// 선택된 댓글 삭제하기
+	private void requestCommentDelete(HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("cnum"));
+
+		CommentDAO dao = CommentDAO.getInstance();
+		dao.deleteComment(num);
 	}
 }

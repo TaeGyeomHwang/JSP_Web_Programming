@@ -89,4 +89,31 @@ public class CommentDAO {
 			}
 		}
 	}
+
+	// 선택된 댓글 삭제하기
+	public void deleteComment(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String sql = "delete from comment where cnum=?";
+
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+
+		} catch (Exception ex) {
+			System.out.println("deleteComment() 에러 : " + ex);
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception ex) {
+				throw new RuntimeException(ex.getMessage());
+			}
+		}
+	}
 }

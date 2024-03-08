@@ -8,7 +8,7 @@ public class BoardDTO {
 	private String content;
 	private String regist_day;
 	private int hit;
-	private String ip;
+	private String fileName;
 
 	public BoardDTO() {
 		super();		
@@ -70,12 +70,12 @@ public class BoardDTO {
 		this.hit = hit;
 	}
 
-	public String getIp() {
-		return ip;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setIp(String ip) {
-		this.ip = ip;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 }

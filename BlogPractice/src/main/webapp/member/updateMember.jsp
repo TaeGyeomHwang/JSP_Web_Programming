@@ -4,6 +4,7 @@
 
 <html>
 <head>
+<jsp:include page="/head.jsp" />
 <link rel="stylesheet" href="../resources/css/styles.css" />
 <%
 String sessionId = (String) session.getAttribute("sessionId");
@@ -20,7 +21,8 @@ String sessionId = (String) session.getAttribute("sessionId");
 </head>
 <body>
 	<jsp:include page="/menu.jsp" />
-	<header class="masthead bg-secondary">
+	<header class="masthead bg-secondary"
+		style="background-image: url('../resources/images/home-bg.jpg');">
 		<div class="container position-relative px-4 px-lg-5">
 			<div class="row gx-4 gx-lg-5 justify-content-center">
 				<div class="col-md-10 col-lg-8 col-xl-7">
@@ -63,7 +65,7 @@ String sessionId = (String) session.getAttribute("sessionId");
 			</div>
 		</div>
 	</header>
-
+	<jsp:include page="/footer.jsp" />
 </body>
 </html>
 <script type="text/javascript">
@@ -82,47 +84,3 @@ String sessionId = (String) session.getAttribute("sessionId");
 		}
 	}
 </script>
-<%-- <c:forEach var="row" items="${resultSet.rows}">
-
-	<div class="container">
-		<form name="newMember" class="form-horizontal"
-			action="processUpdateMember.jsp" method="post"
-			onsubmit="return checkForm()">
-			<div class="form-group  row">
-				<label class="col-sm-2 ">아이디</label>
-				<div class="col-sm-3">
-					<input name="id" type="text" class="form-control" placeholder="id"
-						value="<c:out value='${row.id }'/>" />
-				</div>
-			</div>
-			<div class="form-group  row">
-				<label class="col-sm-2">비밀번호</label>
-				<div class="col-sm-3">
-					<input name="password" type="text" class="form-control"
-						placeholder="password" value="<c:out value='${row.password }'/>">
-				</div>
-			</div>
-			<div class="form-group  row">
-				<label class="col-sm-2">비밀번호확인</label>
-				<div class="col-sm-3">
-					<input name="password_confirm" type="text" class="form-control"
-						placeholder="password_confirm">
-				</div>
-			</div>
-			<div class="form-group  row">
-				<label class="col-sm-2">성명</label>
-				<div class="col-sm-3">
-					<input name="name" type="text" class="form-control"
-						placeholder="name" value="<c:out value='${row.name }'/>">
-				</div>
-			</div>
-
-			<div class="form-group  row">
-				<div class="col-sm-offset-2 col-sm-10 ">
-					<input type="submit" class="btn btn-primary" value="회원수정 ">
-					<a href="deleteMember.jsp" class="btn btn-primary">회원탈퇴</a>
-				</div>
-			</div>
-		</form>
-	</div>
-</c:forEach> --%>
